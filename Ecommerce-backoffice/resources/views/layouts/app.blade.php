@@ -41,7 +41,7 @@
                     <span>Products</span>
                 </a>
 
-                <a href="#" class="menu-item">
+                <a href="{{ route('orders.index') }}" class="menu-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
                     <i class="bi bi-cart3"></i>
                     <span>Orders</span>
                 </a>
@@ -49,7 +49,7 @@
                     <i class="bi bi-people"></i>
                     <span>Customers</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="{{ route('categories.index') }}" class="menu-item {{ request()->routeIs('categories.*') ? 'active' : '' }}">
                     <i class="bi bi-grid-3x3"></i>
                     <span>Categories</span>
                 </a>

@@ -19,6 +19,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     Route::resource('products',ProductController::class);
+    Route::resource('orders', \App\Http\Controllers\OrderController::class);
+    Route::resource('categories', \App\Http\Controllers\CategoryController::class);
     Route::delete('products/{product}/destroyImage/{image}', [ProductController::class, 'destroyImage'])->name('products.destroyImage');
 });
 
