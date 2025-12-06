@@ -36,7 +36,7 @@
                     <span>Dashboard</span>
                 </a>
 
-                <a href="#" class="menu-item">
+                <a href="{{route('products.index')}}" class="menu-item">
                     <i class="bi bi-box-seam"></i>
                     <span>Products</span>
                 </a>
