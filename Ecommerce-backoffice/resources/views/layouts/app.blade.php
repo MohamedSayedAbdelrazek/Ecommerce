@@ -49,7 +49,7 @@
                 <a href="{{ route('users.index') }}"
                     class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
-                    <span>Customers</span>
+                    <span>Users</span>
                 </a>
                 <a href="{{ route('categories.index') }}"
                     class="menu-item {{ request()->routeIs('categories.*') ? 'active' : '' }}">

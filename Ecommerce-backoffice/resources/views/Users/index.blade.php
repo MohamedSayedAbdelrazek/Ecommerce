@@ -48,8 +48,7 @@
 
                         <a href="{{route('users.edit', $user->id)}}" 
                             class="btn btn-warning btn-sm">Edit</a>
-                        <form action="{{route('users.destroy', $user->id)}}"
-                             method="POST" 
+                        <form action="{{route('users.destroy', $user->id)}}"method="POST" 
                              onsubmit="return confirm('Are you sure?')">
                             @csrf
                             @method('DELETE')

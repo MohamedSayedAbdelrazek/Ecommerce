@@ -36,8 +36,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $User)
+    public function show(int $id)
     {
+        $user = User::findOrFail($id);
+        return view('Users.show', compact('user'));
         //
     }
 
@@ -60,8 +62,11 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $User)
+    public function destroy(int $id)
     {
         //
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
+use App\Models\order;
+use App\Models\review;
 
 class User extends Authenticatable
 {
@@ -54,11 +56,11 @@ class User extends Authenticatable
     // Relations
     public function orders()
     {
-        return $this->hasMany(Order::class);
+        return $this->hasMany(order::class);
     }
 
     public function reviews()
     {
-        return $this->hasMany(Review::class);
+        return $this->hasMany(review::class);
     }
 }

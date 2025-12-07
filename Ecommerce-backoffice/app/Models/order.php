@@ -5,6 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Models\product;
+use App\Models\User;
+use App\Models\orderStatus;
+use App\Models\payment;
+use App\Models\shipping;
 
 class order extends Model
 {
@@ -27,7 +32,7 @@ class order extends Model
     // Relations
     public function orderStatus()
     {
-        return $this->belongsTo(OrderStatus::class);
+        return $this->belongsTo(orderStatus::class);
     }
 
     public function user()
@@ -37,16 +42,16 @@ class order extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(product::class);
     }
 
     public function payments()
     {
-        return $this->hasMany(Payment::class);
+        return $this->hasMany(payment::class);
     }
 
     public function shippings()
     {
-        return $this->hasMany(Shipping::class);
+        return $this->hasMany(shipping::class);
     }
 }
