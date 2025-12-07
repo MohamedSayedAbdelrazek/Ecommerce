@@ -45,7 +45,7 @@
                     <i class="bi bi-cart3"></i>
                     <span>Orders</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="{{ route('users.index') }}" class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     <span>Customers</span>
                 </a>
