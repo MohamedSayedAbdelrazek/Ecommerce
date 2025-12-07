@@ -41,15 +41,18 @@
                     <span>Products</span>
                 </a>
 
-                <a href="{{ route('orders.index') }}" class="menu-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
+                <a href="{{ route('orders.index') }}"
+                    class="menu-item {{ request()->routeIs('orders.*') ? 'active' : '' }}">
                     <i class="bi bi-cart3"></i>
                     <span>Orders</span>
                 </a>
-                <a href="{{ route('users.index') }}" class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
+                <a href="{{ route('users.index') }}"
+                    class="menu-item {{ request()->routeIs('users.*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     <span>Customers</span>
                 </a>
-                <a href="{{ route('categories.index') }}" class="menu-item {{ request()->routeIs('categories.*') ? 'active' : '' }}">
+                <a href="{{ route('categories.index') }}"
+                    class="menu-item {{ request()->routeIs('categories.*') ? 'active' : '' }}">
                     <i class="bi bi-grid-3x3"></i>
                     <span>Categories</span>
                 </a>
@@ -94,10 +97,45 @@
                 </div>
                 <div class="user-info">
                     <div>
-                        <div class="fw-bold">Admin User</div>
-                        <small class="text-muted">Administrator</small>
+                        <div class="fw-bold">{{ auth()->user()->name }}</div>
+                        <small class="text-muted">{{ strtoupper(auth()->user()->role) }}</small>
                     </div>
-                    <div class="user-avatar">A</div>
+                    <div class="user-dropdown">
+                        <div class="user-avatar" id="userMenuButton">
+                            {{ strtoupper(auth()->user()->name[0]) }}
+                        </div>
+                        <div class="dropdown-menu" id="userDropdownMenu">
+                            <div class="dropdown-header">
+                                <div class="dropdown-user-name">{{ auth()->user()->name }}</div>
+                                <div class="dropdown-user-email">{{ auth()->user()->email }}</div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                                <i class="bi bi-person"></i>
+                                <span>Profile Settings</span>
+                            </a>
+                            <a href="{{ route('user-password.edit') }}" class="dropdown-item">
+                                <i class="bi bi-key"></i>
+                                <span>Change Password</span>
+                            </a>
+                            <a href="{{ route('two-factor.show') }}" class="dropdown-item">
+                                <i class="bi bi-shield-check"></i>
+                                <span>Two-Factor Authentication</span>
+                            </a>
+                            <a href="{{ route('appearance.edit') }}" class="dropdown-item">
+                                <i class="bi bi-palette"></i>
+                                <span>Appearance</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <form id="dropdown-logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button type="submit" class="dropdown-item logout-item">
+                                    <i class="bi bi-box-arrow-right"></i>
+                                    <span>Logout</span>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
 
