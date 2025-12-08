@@ -8,13 +8,7 @@
 
 @section('content')
 
-
-<div class="mb-3">
-    <a href="{{route('users.create')}}" class="btn btn-secondary">
-        <i class="bi bi-plus-circle"></i> add user
-    </a>
-</div>
-    
+ 
  <div class="table-card">
     @if(session('success'))
         <div class="alert alert-success">

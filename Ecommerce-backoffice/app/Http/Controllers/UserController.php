@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 
+
 class UserController extends Controller
 {
     /**
@@ -46,9 +47,12 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $User)
+    public function edit(int $id)
     {
         //
+        $user = User::findOrFail($id);
+        return view('Users.edit', compact('user'));
+
     }
 
     /**
@@ -57,6 +61,16 @@ class UserController extends Controller
     public function update(Request $request, User $User)
     {
         //
+        $request->validate([
+            
+            'role' => 'required|string|max:255',
+        ]);
+
+        $User->update([
+            'role' => $request->role,
+        ]);
+
+        return redirect()->route('users.index')->with('success', 'User Role updated successfully');
     }
 
     /**
