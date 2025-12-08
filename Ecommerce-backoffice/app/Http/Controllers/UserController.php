@@ -61,15 +61,12 @@ class UserController extends Controller
     public function update(Request $request, User $User)
     {
         //
-        $request->validate([
-            
-            'role' => 'required|string|max:255',
+        $validated = $request->validate([
+            'role' => 'required|in:user,admin',
         ]);
-
-        $User->update([
-            'role' => $request->role,
-        ]);
-
+        
+        $User->update($validated);
+        
         return redirect()->route('users.index')->with('success', 'User Role updated successfully');
     }
 

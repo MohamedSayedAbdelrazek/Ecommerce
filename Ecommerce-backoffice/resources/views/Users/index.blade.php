@@ -23,7 +23,6 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Role</th>
-                    <th>Status</th>
                     <th>Created At</th>
                     <th>Actions</th>
                 </tr>
@@ -34,7 +33,6 @@
                     <td>{{$user->name}}</td>
                     <td>{{$user->email}}</td>
                     <td>{{$user->role ?? 'User'}}</td>
-                    <td><span class="badge bg-success">Active</span></td>
                     <td>{{$user->created_at->format('M d, Y')}}</td>
                     <td class="d-flex gap-2">
                         <a href="{{route('users.show', $user->id)}}"
