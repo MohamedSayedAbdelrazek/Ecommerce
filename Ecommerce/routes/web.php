@@ -4,26 +4,32 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Laravel\Fortify\Features;
 
 Route::get('/', function () {
-    return Inertia::render('welcome', [
-        'canRegister' => Features::enabled(Features::registration()),
-    ]);
+    return view('index');
 })->name('home');
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::get('/get-started', function () {
+    if (auth()->check()) {
+        return auth()->user()->role === 'admin'
+            ? redirect()->route('dashboard')
+            : redirect()->route('user.index');
+    }
+
+    return redirect()->route('login');
+})->name('get-started');
+
+Route::middleware(['auth'])->group(function () {
     Route::get('/redirects', function () {
         if (auth()->user()->role === 'admin') {
             return redirect()->route('dashboard');
         }
-        return redirect()->route('user.dashboard');
+        return redirect()->route('user.index');
     })->name('redirects');
 
-    Route::get('/user/dashboard', function () {
+    Route::get('/user', function () {
         return view('user.index');
-    })->name('user.dashboard');
+    })->name('user.index');
 });
 
 Route::middleware(['auth', 'verified', 'role'])->group(function () {
