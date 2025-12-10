@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\user\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -27,9 +28,7 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('user.index');
     })->name('redirects');
 
-    Route::get('/user', function () {
-        return view('user.index');
-    })->name('user.index');
+    Route::get('/user',[CustomerController::class,'index'])->name('user.index');
 });
 
 Route::middleware(['auth', 'verified', 'role'])->group(function () {

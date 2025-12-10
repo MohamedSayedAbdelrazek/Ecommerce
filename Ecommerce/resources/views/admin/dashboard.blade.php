@@ -91,44 +91,44 @@
     </div>
 
 
-        <!-- Low Stock Alert -->
-        <div class="table-card" style="border-left: 4px solid #ef4444;">
-            <h3><i class="bi bi-exclamation-triangle-fill" style="color: #ef4444; margin-right: 0.5rem;"></i>Low Stock Alert
-            </h3>
-            <div class="table-responsive">
-                <table class="custom-table">
-                    <thead>
+    <!-- Low Stock Alert -->
+    <div class="table-card" style="border-left: 4px solid #ef4444;">
+        <h3><i class="bi bi-exclamation-triangle-fill" style="color: #ef4444; margin-right: 0.5rem;"></i>Low Stock Alert
+        </h3>
+        <div class="table-responsive">
+            <table class="custom-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Stock</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @forelse ($lowStockProducts as $product)
                         <tr>
-                            <th>Product</th>
-                            <th>Stock</th>
-                            <th>Status</th>
+                            <td><strong>{{ $product->productName }}</strong></td>
+                            <td><span
+                                    class="badge-status {{ $product->quantity < 5 ? 'cancelled' : 'pending' }}">{{ $product->quantity }}
+                                    left</span></td>
+                            <td>
+                                @if ($product->quantity < 5)
+                                    <span style="color: #ef4444; font-weight: 600;">Critical</span>
+                                @else
+                                    <span style="color: #f59e0b; font-weight: 600;">Low</span>
+                                @endif
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @forelse ($lowStockProducts as $product)
-                            <tr>
-                                <td><strong>{{ $product->productName }}</strong></td>
-                                <td><span
-                                        class="badge-status {{ $product->quantity < 5 ? 'cancelled' : 'pending' }}">{{ $product->quantity }}
-                                        left</span></td>
-                                <td>
-                                    @if ($product->quantity < 5)
-                                        <span style="color: #ef4444; font-weight: 600;">Critical</span>
-                                    @else
-                                        <span style="color: #f59e0b; font-weight: 600;">Low</span>
-                                    @endif
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="3" style="text-align: center; color: #10b981;">All products are well
-                                    stocked! ✓</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
+                    @empty
+                        <tr>
+                            <td colspan="3" style="text-align: center; color: #10b981;">All products are well
+                                stocked! ✓</td>
+                        </tr>
+                    @endforelse
+                </tbody>
+            </table>
         </div>
+    </div>
 
     <!-- Recent Orders Table -->
     <div class="table-card">
