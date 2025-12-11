@@ -63,25 +63,25 @@
 <section class="team-section py-5 bg-light">
     <div class="container">
         <h2 class="text-center fw-bold mb-2">Meet Our (Crew)</h2>
-        <p class="text-center text-muted mb-5">Three incredible talents sailing together to bring you the best experience!</p>
+        <p class="text-center mb-5">Three incredible talents sailing together to bring you the best experience!</p>
         <div class="row g-4">
             <div class="col-md-6 col-lg-4 text-center">
                 <img src="{{ asset('images/liffy1.jpg') }}" alt="Luffy" class="team-member-image rounded-circle mb-3">
                 <h5 class="fw-bold">Monkey D. Luffy 🔴</h5>
                 <p class="text-primary fw-bold">Captain & Founder</p>
-                <p class="text-muted small">Dreams big, laughs hard, leads with heart. Determined to be the King of E-commerce! 👑</p>
+                <p >Dreams big, laughs hard, leads with heart. Determined to be the King of E-commerce! 👑</p>
             </div>
             <div class="col-md-6 col-lg-4 text-center">
                 <img src="{{ asset('images/zoro.jpg') }}" alt="Zoro" class="team-member-image rounded-circle mb-3">
                 <h5 class="fw-bold">Roronoa Zoro ⚔️</h5>
                 <p class="text-primary fw-bold">Quality Manager</p>
-                <p class="text-muted small">Precision & dedication. Ensures every product meets our legendary standards! 🗡️</p>
+                <p >Precision & dedication. Ensures every product meets our legendary standards! 🗡️</p>
             </div>
             <div class="col-md-6 col-lg-4 text-center">
                 <img src="{{ asset('images/Usopp.jpg') }}" alt="Usopp" class="team-member-image rounded-circle mb-3">
                 <h5 class="fw-bold">Usopp 🎯</h5>
                 <p class="text-primary fw-bold">Customer Relations</p>
-                <p class="text-muted small">Great storyteller & sniper of solutions. Always hits the mark with customer care! 🎪</p>
+                <p >Great storyteller & sniper of solutions. Always hits the mark with customer care! 🎪</p>
             </div>
         </div>
     </div>

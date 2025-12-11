@@ -38,10 +38,10 @@
                         <a class="nav-link" href="#">Shop</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.about') }}">About</a>
+                        <a class="nav-link" href="{{ route('user.about') }}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
+                        <a class="nav-link" href="{{ route('user.contact') }}">Contact Us</a>
                     </li>
                 </ul>
 

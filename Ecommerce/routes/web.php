@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function () {
         return view('user.about.about');
     })->name('user.about');
+    Route::get('/contact', function () {
+        return view('user.about.contact');
+    })->name('user.contact');
 });
 
 Route::middleware(['auth', 'verified', 'role'])->group(function () {
