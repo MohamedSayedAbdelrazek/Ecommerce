@@ -13,6 +13,7 @@ use Inertia\Inertia;
 use Laravel\Fortify\Features;
 use Laravel\Fortify\Fortify;
 use Laravel\Fortify\Contracts\RegisterResponse;
+use Laravel\Fortify\Contracts\LoginResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,7 @@ class FortifyServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Customize registration redirect
         $this->app->singleton(RegisterResponse::class, function () {
             return new class implements RegisterResponse {
                 public function toResponse($request)
@@ -29,6 +31,9 @@ class FortifyServiceProvider extends ServiceProvider
                 }
             };
         });
+
+        // Customize login redirect based on user role
+       
     }
 
     /**

@@ -55,6 +55,16 @@
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li><a class="dropdown-item" href="#">My Orders</a></li>
                             <li><a class="dropdown-item" href="#">Profile</a></li>
+                            
+                            @if(auth()->user()->role === 'admin')
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" href="{{ route('dashboard') }}">
+                                    <i class="bi bi-speedometer2"></i> Admin Dashboard
+                                </a>
+                            </li>
+                            @endif
+                            
                             <li>
                                 <hr class="dropdown-divider">
                             </li>

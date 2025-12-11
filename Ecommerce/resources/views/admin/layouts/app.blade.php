@@ -110,6 +110,11 @@
                                 <div class="dropdown-user-email">{{ auth()->user()->email }}</div>
                             </div>
                             <div class="dropdown-divider"></div>
+                            <a href="{{ route('user.index') }}" class="dropdown-item">
+                                <i class="bi bi-shop"></i>
+                                <span>View Store</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
                             <a href="{{ route('profile.edit') }}" class="dropdown-item">
                                 <i class="bi bi-person"></i>
                                 <span>Profile Settings</span>
