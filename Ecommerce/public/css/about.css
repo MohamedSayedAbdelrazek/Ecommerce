@@ -9,7 +9,7 @@
     transition: transform 0.3s ease;
 }
 
-.hero-section img:hover {
+.hero-section img:hover {   
     transform: scale(1.05);
 }
 

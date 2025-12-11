@@ -17,7 +17,10 @@
 </head>
 
 <body>
-
+     <section  style="background: linear-gradient(to right, #e00034 0%, #d00070 20%,
+            #a400c7 50%, #4a1fdc 75%, #0047ff 100%);">
+        
+     
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);">
 
@@ -123,6 +126,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     @yield('extra-js')
+    </section> 
 </body>
 
 </html>

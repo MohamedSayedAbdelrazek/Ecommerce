@@ -6,8 +6,8 @@
 
 body {
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
+background: linear-gradient(to right, #e00034 0%, #d00070 20%,
+            #a400c7 50%, #4a1fdc 75%, #0047ff 100%);    min-height: 100vh;
     padding: 0;
     margin: 0;
 }
@@ -33,7 +33,7 @@ body {
 
 .sidebar-header {
     padding: 25px 20px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
     color: white;
     text-align: center;
 }
@@ -118,7 +118,7 @@ body {
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -262,7 +262,7 @@ body {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
 }
 
 .stat-card:hover {
@@ -282,22 +282,22 @@ body {
 }
 
 .stat-card.primary .stat-icon {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+   background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
     color: white;
 }
 
 .stat-card.success .stat-icon {
-    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+   background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
     color: white;
 }
 
 .stat-card.warning .stat-icon {
-    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
     color: white;
 }
 
 .stat-card.info .stat-icon {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);
     color: white;
 }
 
@@ -380,8 +380,7 @@ body {
 }
 
 .custom-table thead th {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+background: linear-gradient(to right, #102b47, #1a2942, #2d3e5f);    color: white;
     padding: 15px;
     text-align: left;
     font-weight: 600;
