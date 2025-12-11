@@ -39,6 +39,7 @@
                 <label for="price" class="form-label">Product Price</label>
             <input type="number" name="price" id="price"
                    class="form-control"
+                   min="0" step="1"
                    value="{{ old('price') }}">
             </div>
 
@@ -46,6 +47,7 @@
                 <label for="quantity" class="form-label">Product Quantity</label>
             <input type="number" name="quantity" id="quantity"
                    class="form-control"
+                   min="0" step="1"
                    value="{{ old('quantity') }}">
             </div>
 
