@@ -28,7 +28,10 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('user.index');
     })->name('redirects');
 
-    Route::get('/user',[CustomerController::class,'index'])->name('user.index');
+    Route::get('/user', [CustomerController::class, 'index'])->name('user.index');
+    Route::get('/about', function () {
+        return view('user.about.about');
+    })->name('user.about');
 });
 
 Route::middleware(['auth', 'verified', 'role'])->group(function () {

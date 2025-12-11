@@ -1,0 +1,60 @@
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(to right, #e00034 0%, #d00070 20%,
+            #a400c7 50%, #4a1fdc 75%, #0047ff 100%);
+    color: white;
+}
+
+.hero-section img {
+    transition: transform 0.3s ease;
+}
+
+.hero-section img:hover {
+    transform: scale(1.05);
+}
+
+/* Values Section */
+.values-section {
+    background: linear-gradient(to right, #e00034 0%, #d00070 20%,
+            #a400c7 50%, #4a1fdc 75%, #0047ff 100%);
+    color: white;
+}
+
+.value-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.value-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Team Section */
+.team-member-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.team-member-image:hover {
+    transform: scale(1.05);
+}
+
+/* dowwn Section */
+.down-section {
+    background: linear-gradient(to right, #e00034 0%, #d00070 20%,
+            #a400c7 50%, #4a1fdc 75%, #0047ff 100%);
+    color: white;
+}
+
+.down-section .btn-light {
+    transition: all 0.3s ease;
+}
+
+.down-section .btn-light:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
