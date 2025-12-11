@@ -6,6 +6,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\user\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\ShopController;
+use App\Http\Controllers\user\ContactController;
 
 Route::get('/', function () {
     return view('index');
@@ -21,6 +22,9 @@ Route::get('/get-started', function () {
     return redirect()->route('login');
 })->name('get-started');
 
+Route::get('/contact', [ContactController::class, 'showForm'])->name('user.contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/redirects', function () {
         if (auth()->user()->role === 'admin') {
@@ -34,9 +38,6 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function () {
         return view('user.about.about');
     })->name('user.about');
-    Route::get('/contact', function () {
-        return view('user.about.contact');
-    })->name('user.contact');
 });
 
 Route::middleware(['auth', 'verified', 'role'])->group(function () {

@@ -19,7 +19,8 @@
 <body>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);">
+
         <div class="container">
             <a class="navbar-brand" href="{{ route('user.index') }}">
                 <i class="bi bi-shop"></i> E-Shop
@@ -101,7 +102,8 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-primary text-white py-3 mt-auto">
+    <footer class="text-white py-3 mt-auto" style="background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);">
+
         <div class="container text-center">
             <p class="mb-0">&copy; {{ date('Y') }} E-Shop. All rights reserved.</p>
         </div>

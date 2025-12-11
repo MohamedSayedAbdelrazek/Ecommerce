@@ -51,38 +51,74 @@
             <div class="col-lg-8">
                 <div class="form-card p-5">
                     <h2 class="fw-bold mb-4 text-center">✉️ Send Us a Message</h2>
-                    <form method="POST" action="#">
+                    
+                    @if(session('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>{{ session('success') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    @if($errors->any())
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            <strong>Whoops!</strong> There were some problems with your input.
+                            <ul class="mb-0 mt-2">
+                                @foreach($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('contact.store') }}">
                         @csrf
                         <div class="mb-3">
                             <label for="name" class="form-label fw-bold">Full Name</label>
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Your full name" required>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Your full name" value="{{ old('name') }}" required>
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="email" class="form-label fw-bold">Email Address</label>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="your.email@gmail.com" required>
+                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" placeholder="your.email@gmail.com" value="{{ old('email') }}" required>
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="phone" class="form-label fw-bold">Phone (Optional)</label>
-                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="0123456789">
+                            <input type="tel" class="form-control @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="0123456789" value="{{ old('phone') }}">
+                            @error('phone')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="subject" class="form-label fw-bold">Subject</label>
-                            <select class="form-select" id="subject" name="subject" required>
+                            <select class="form-select @error('subject') is-invalid @enderror" id="subject" name="subject" required>
                                 <option value="">Select a subject...</option>
-                                <option value="order">Order Inquiry</option>
-                                <option value="shipping">Shipping Question</option>
-                                <option value="product">Product Information</option>
-                                <option value="feedback">Feedback</option>
-                                <option value="other">Other</option>
+                                <option value="order" {{ old('subject') == 'order' ? 'selected' : '' }}>Order Inquiry</option>
+                                <option value="shipping" {{ old('subject') == 'shipping' ? 'selected' : '' }}>Shipping Question</option>
+                                <option value="product" {{ old('subject') == 'product' ? 'selected' : '' }}>Product Information</option>
+                                <option value="feedback" {{ old('subject') == 'feedback' ? 'selected' : '' }}>Feedback</option>
+                                <option value="other" {{ old('subject') == 'other' ? 'selected' : '' }}>Other</option>
                             </select>
+                            @error('subject')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
                             <label for="message" class="form-label fw-bold">Message</label>
-                            <textarea class="form-control" id="message" name="message" rows="6" placeholder="Tell us what's on your mind..." required></textarea>
+                            <textarea class="form-control @error('message') is-invalid @enderror" id="message" name="message" rows="6" placeholder="Tell us what's on your mind..." required>{{ old('message') }}</textarea>
+                            @error('message')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-lg w-100 fw-bold contact-btn">
