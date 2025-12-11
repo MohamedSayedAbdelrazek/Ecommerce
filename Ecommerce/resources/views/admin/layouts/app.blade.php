@@ -56,9 +56,9 @@
                     <i class="bi bi-grid-3x3"></i>
                     <span>Categories</span>
                 </a>
-                <a href="#" class="menu-item">
+                <a href="{{route('messages.index')}}" class="menu-item {{ request()->routeIs('messages.*') ? 'active' : '' }}">
                     <i class="bi bi-star"></i>
-                    <span>Reviews</span>
+                    <span>Messages</span>
                 </a>
                 <a href="#" class="menu-item">
                     <i class="bi bi-credit-card"></i>
@@ -67,14 +67,6 @@
                 <a href="#" class="menu-item">
                     <i class="bi bi-truck"></i>
                     <span>Shipping</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="bi bi-bar-chart"></i>
-                    <span>Analytics</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="bi bi-gear"></i>
-                    <span>Settings</span>
                 </a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf

@@ -28,4 +28,23 @@ class ContactController extends Controller
 
         return redirect()->back()->with('success', 'Thank you for contacting us! We will get back to you soon.');
     }
+
+    public function index()
+    {
+        $messages = Message::all();
+        return view('admin.messages.index', compact('messages'));
+    }
+
+    public function show(int $id) 
+    {
+        $message = Message::findOrFail($id);
+        return view('admin.messages.show', compact('message'));
+    }
+
+    public function destroy(int $id) 
+    {
+        $message = Message::findOrFail($id);
+        $message->delete();
+        return redirect()->route('messages.index')->with('success', 'Message deleted successfully.');
+    }
 }

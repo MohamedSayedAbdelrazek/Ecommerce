@@ -48,6 +48,11 @@ Route::middleware(['auth', 'verified', 'role'])->group(function () {
     Route::resource('orders', \App\Http\Controllers\OrderController::class);
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
     Route::resource('users', UserController::class);
+
+    Route::get('messages', [ContactController::class, 'index'])->name('messages.index');
+    Route::get('messages/{message}', [ContactController::class, 'show'])->name('messages.show');
+    Route::delete('messages/{message}', [ContactController::class, 'destroy'])->name('messages.destroy');
+    
     Route::delete('products/{product}/destroyImage/{image}', [ProductController::class, 'destroyImage'])->name('products.destroyImage');
 });
 
