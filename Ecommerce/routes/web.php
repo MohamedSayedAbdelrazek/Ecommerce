@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\user\CustomerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\user\ShopController;
 
 Route::get('/', function () {
     return view('index');
@@ -29,6 +30,7 @@ Route::middleware(['auth'])->group(function () {
     })->name('redirects');
 
     Route::get('/user', [CustomerController::class, 'index'])->name('user.index');
+    Route::get('/shop', [ShopController::class, 'index'])->name('user.shop');
     Route::get('/about', function () {
         return view('user.about.about');
     })->name('user.about');
