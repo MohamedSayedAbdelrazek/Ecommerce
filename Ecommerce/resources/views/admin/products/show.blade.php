@@ -68,15 +68,36 @@
                     <h5 class="card-title mb-4">Product Images</h5>
 
                     @if ($product->images->count() > 0)
-                        <div class="row g-2">
-                            @foreach ($product->images as $image)
-                                <div class="col-6">
-                                    <a href="{{ asset('storage/' . $image->imagePath) }}" target="_blank">
-                                        <img src="{{ asset('storage/' . $image->imagePath) }}" class="img-thumbnail w-100"
-                                            style="height:500px; object-fit: cover;" alt="Product Image">
-                                    </a>
-                                </div>
-                            @endforeach
+                        <!-- Simple Bootstrap Carousel -->
+                        <div id="productImagesCarousel" class="carousel slide" data-bs-ride="carousel">
+                            <!-- Carousel Items -->
+                            <div class="carousel-inner">
+                                @foreach ($product->images as $index => $image)
+                                    <div class="carousel-item {{ $index === 0 ? 'active' : '' }}">
+                                        <a href="{{ asset('storage/' . $image->imagePath) }}" target="_blank">
+                                            <img src="{{ asset('storage/' . $image->imagePath) }}" class="d-block w-100"
+                                                style="height: 400px; object-fit: contain; background: #fff;"
+                                                alt="Product Image">
+                                        </a>
+                                    </div>
+                                @endforeach
+                            </div>
+
+                            <!-- Carousel Controls -->
+                            @if ($product->images->count() > 1)
+                                <button class="carousel-control-prev" type="button" data-bs-target="#productImagesCarousel"
+                                    data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon bg-secondary rounded-circle p-2"
+                                        aria-hidden="true"></span>
+                                    <span class="visually-hidden">Previous</span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#productImagesCarousel"
+                                    data-bs-slide="next">
+                                    <span class="carousel-control-next-icon bg-secondary rounded-circle p-2"
+                                        aria-hidden="true"></span>
+                                    <span class="visually-hidden">Next</span>
+                                </button>
+                            @endif
                         </div>
                     @else
                         <div class="alert alert-light text-center border">

@@ -75,8 +75,8 @@
                 @foreach ($product->images as $image)
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                            <img src="{{ asset('storage/' . $image->imagePath) }}" class="card-img-top img-fluid"
-                                alt="Product Image">
+                            <img src="{{ asset('storage/' . $image->imagePath) }}" class="card-img-top"
+                                style="height: 200px; object-fit: contain; background: #fff;" alt="Product Image">
                             <div class="card-body text-center">
                                 <form action="{{ route('products.destroyImage', [$product->id, $image->id]) }}"
                                     method="POST">
