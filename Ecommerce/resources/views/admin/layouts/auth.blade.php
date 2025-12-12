@@ -8,7 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: #f8f9fa;
+           background: linear-gradient(to right, #e00034 0%, #d00070 20%,
+            #a400c7 50%, #4a1fdc 75%, #0047ff 100%);
         }
         .auth-card {
             max-width: 400px;

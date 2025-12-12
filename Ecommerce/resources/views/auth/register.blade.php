@@ -3,8 +3,8 @@
 @section('title', 'Register')
 
 @section('content')
-<div class="auth-card">
-    <h3 class="text-center mb-4">Register</h3>
+<div class="auth-card" style="background: linear-gradient(to right, #0a1929, #1a2942, #2d3e5f);">
+    <h3 class="text-center mb-4 text-white">Register</h3>
 
     @if ($errors->any())
         <div class="alert alert-danger">
@@ -19,26 +19,26 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="mb-3">
-            <label for="name" class="form-label">Name</label>
+            <label for="name" class="form-label text-white">Name</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required autofocus>
         </div>
         <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
+            <label for="email" class="form-label text-white">Email address</label>
             <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
         </div>
         <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
+            <label for="password" class="form-label text-white">Password</label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <div class="mb-3">
-            <label for="password_confirmation" class="form-label">Confirm Password</label>
+            <label for="password_confirmation" class="form-label text-white">Confirm Password</label>
             <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" required>
         </div>
         <div class="d-grid">
             <button type="submit" class="btn btn-primary">Register</button>
         </div>
         <div class="mt-3 text-center">
-            <a href="{{ route('login') }}" class="text-decoration-none">Already have an account? Login</a>
+            <a href="{{ route('login') }}" class="text-decoration-none text-white">Already have an account? Login</a>
         </div>
     </form>
 </div>
