@@ -35,7 +35,29 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+
+        if(auth()->user()->role=="user"){
+            $request->validate([
+            'quantity' => 'required|integer',
+            'product_id' => 'required|exists:products,id',
+        ]);
+        $product = product::findOrFail($request->product_id);
+        $totalPrice = $product->price * $request->quantity;
+        $status = orderStatus::where('orderStatus','pending')->first();
+        order::create([
+            'orderName' => auth()->user()->name,
+            'orderDate' => now()->toDateString(),
+            'totalAmount' => $request->quantity,
+            'price' => $product->price,
+            'quantity' => $request->quantity,
+            'totalPrice' => $totalPrice,
+            'order_status_id' => $status->id,
+            'user_id' => auth()->user()->id,
+            'product_id' => $product->id
+
+        ]);
+        }else{
+            $request->validate([
             'orderName' => 'required',
             'orderDate' => 'required|date',
             'totalAmount' => 'required|numeric',
@@ -46,10 +68,13 @@ class OrderController extends Controller
             'user_id' => 'required|exists:users,id',
             'product_id' => 'required|exists:products,id',
         ]);
-
         order::create($request->all());
-
-        return redirect()->route('orders.index')->with('success', 'Order created successfully');
+        }
+        $quantity = $product->quantity - $request->quantity;
+        $product->update([
+            'quantity'=> $quantity
+        ]);
+        return back()->with('success', 'Order created successfully');
     }
 
     /**

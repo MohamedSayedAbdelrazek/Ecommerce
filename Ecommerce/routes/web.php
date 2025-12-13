@@ -3,14 +3,15 @@
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\user\CustomerController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\user\ShopController;
 use App\Http\Controllers\user\ContactController;
+use App\Http\Controllers\user\HomeController;
+use App\Http\Controllers\user\ProfileController;
+use App\Http\Controllers\OrderController;
 
-Route::get('/', function () {
-    return view('index');
-})->name('home');
+// routes/web.php (Line 10)
+// Use the imported class reference
 
 Route::get('/get-started', function () {
     if (auth()->check()) {
@@ -33,19 +34,27 @@ Route::middleware(['auth'])->group(function () {
         return redirect()->route('user.index');
     })->name('redirects');
 
-    Route::get('/user', [CustomerController::class, 'index'])->name('user.index');
+    Route::get('/', [HomeController::class, 'index'])->name('user.index');
     Route::get('/shop', [ShopController::class, 'index'])->name('user.shop');
+    Route::middleware(['auth'])->group(function () {
+    // ...
+    Route::get('/profile', [ProfileController::class, 'show'])->name('user.profile');
+    Route::post('/profile', [ProfileController::class, 'update'])->name('user.profile.update');
+    // ...
+});
     Route::get('/about', function () {
         return view('user.about.about');
     })->name('user.about');
 });
-
+Route::post('/orders',[OrderController::class, 'store'])->middleware(['auth', 'verified'])->name('orders.store');
 Route::middleware(['auth', 'verified', 'role'])->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::resource('products', ProductController::class);
-    Route::resource('orders', \App\Http\Controllers\OrderController::class);
+    Route::resource('orders', \App\Http\Controllers\OrderController::class)->except([
+    'store'
+]);
     Route::resource('categories', \App\Http\Controllers\CategoryController::class);
     Route::resource('users', UserController::class);
 

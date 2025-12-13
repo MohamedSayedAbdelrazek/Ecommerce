@@ -99,36 +99,46 @@
                                 </div>
                                 
                                 <div class="card-footer bg-white border-0 pt-0 pb-3">
-                                    
-                                    @if ($stock > 0)
-                                        {{-- NEW: Quantity Selector and Add to Cart --}}
-                                        <div class="input-group input-group-sm quantity-control" data-product-id="{{ $product->id }}">
-                                            
-                                            <button class="btn btn-outline-secondary btn-minus" type="button" disabled>-</button>
-                                            
-                                            <input type="number" 
-                                                   class="form-control text-center quantity-input" 
-                                                   value="1" 
-                                                   min="1" 
-                                                   max="{{ $stock }}" 
-                                                   style="max-width: 50px;" 
-                                                   aria-label="Quantity"
-                                            >
-                                            
-                                            <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
-                                            
-                                            <button class="btn btn-success add-to-cart-btn ms-2" type="button">
-                                                <i class="bi bi-cart-plus"></i> Add
-                                            </button>
-                                        </div>
-                                    @else
-                                        {{-- Out of Stock Button --}}
-                                        <button class="btn btn-danger btn-lg w-100" type="button" disabled>
-                                            Out of Stock
-                                        </button>
-                                    @endif
+    
+    @if ($stock > 0)
+        
+        {{-- 🚨 ACTION: Wrap the input group in a form for submission --}}
+        <form action="{{ route('orders.store') }}" method="POST">
+            @csrf
+            
+            {{-- Hidden fields to send with the form --}}
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="quantity" class="quantity-form-input" value="1">
+            
+            <div class="input-group input-group-sm quantity-control" data-product-id="{{ $product->id }}">
+                <button class="btn btn-outline-secondary btn-minus" type="button" disabled>-</button>
+                
+                {{-- NOTE: This input is for VISUAL/JS control --}}
+                <input type="number" 
+                       class="form-control text-center quantity-input" 
+                       value="1" 
+                       min="1" 
+                       max="{{ $stock }}" 
+                       style="max-width: 50px;" 
+                       aria-label="Quantity"
+                >
+                
+                <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                
+                {{-- 🚨 ACTION: Change 'type="button"' to 'type="submit"' to send the form --}}
+                <button class="btn btn-success add-to-cart-btn ms-2" type="submit">
+                    <i class="bi bi-cart-plus"></i> Add
+                </button>
+            </div>
+        </form>
+    @else
+        {{-- Out of Stock Button --}}
+        <button class="btn btn-danger btn-lg w-100" type="button" disabled>
+            Out of Stock
+        </button>
+    @endif
 
-                                </div>
+</div>
                             </div>
                         </div>
                     @empty
@@ -208,61 +218,80 @@
         });
 
         // NEW: Quantity Control Logic
-        document.querySelectorAll('.quantity-control').forEach(control => {
-            const minusBtn = control.querySelector('.btn-minus');
-            const plusBtn = control.querySelector('.btn-plus');
-            const input = control.querySelector('.quantity-input');
-            const maxQuantity = parseInt(input.getAttribute('max'));
+        // NEW: Quantity Control Logic
+document.querySelectorAll('.quantity-control').forEach(control => {
+    const minusBtn = control.querySelector('.btn-minus');
+    const plusBtn = control.querySelector('.btn-plus');
+    const input = control.querySelector('.quantity-input');
+    const maxQuantity = parseInt(input.getAttribute('max'));
+    
+    // 🚨 CRITICAL: Find the hidden input associated with this control group
+    // Assuming the hidden input is right before the control div in the form
+    const form = control.closest('form');
+    const hiddenInput = form.querySelector('.quantity-form-input');
 
-            function checkButtons() {
-                const currentVal = parseInt(input.value);
-                minusBtn.disabled = currentVal <= 1;
-                plusBtn.disabled = currentVal >= maxQuantity;
-            }
 
-            // Initial check
-            checkButtons(); 
+    function updateHiddenInput(newVal) {
+        if (hiddenInput) {
+            hiddenInput.value = newVal;
+        }
+    }
 
-            minusBtn.addEventListener('click', function() {
-                let currentVal = parseInt(input.value);
-                if (currentVal > 1) {
-                    input.value = currentVal - 1;
-                }
-                checkButtons();
-            });
-
-            plusBtn.addEventListener('click', function() {
-                let currentVal = parseInt(input.value);
-                if (currentVal < maxQuantity) {
-                    input.value = currentVal + 1;
-                }
-                checkButtons();
-            });
-
-            // Prevent manual input exceeding limits
-            input.addEventListener('input', function() {
-                let currentVal = parseInt(input.value);
-                if (isNaN(currentVal) || currentVal < 1) {
-                    input.value = 1;
-                } else if (currentVal > maxQuantity) {
-                    input.value = maxQuantity;
-                }
-                checkButtons();
-            });
-            
-            // Add to Cart functionality (updated to use quantity)
-            control.querySelector('.add-to-cart-btn').addEventListener('click', function() {
-                const productId = control.getAttribute('data-product-id');
-                const quantity = input.value;
-                
-                // In a real application, you'd make an AJAX call here:
-                // axios.post('/cart/add', { product_id: productId, quantity: quantity })
-                
-                alert(`Added ${quantity} of product #${productId} to cart!`);
-                // You would update the cart-count dynamically here!
-            });
-        });
+    function checkButtons() {
+        const currentVal = parseInt(input.value);
+        minusBtn.disabled = currentVal <= 1;
+        plusBtn.disabled = currentVal >= maxQuantity;
         
-        console.log("Home page loaded.");
+        // 🚨 IMPORTANT: Update the hidden field when the visual input changes
+        updateHiddenInput(currentVal); 
+    }
+
+    // Initial check
+    checkButtons(); 
+
+    minusBtn.addEventListener('click', function() {
+        let currentVal = parseInt(input.value);
+        if (currentVal > 1) {
+            input.value = currentVal - 1;
+        }
+        checkButtons();
+    });
+
+    plusBtn.addEventListener('click', function() {
+        let currentVal = parseInt(input.value);
+        if (currentVal < maxQuantity) {
+            input.value = currentVal + 1;
+        }
+        checkButtons();
+    });
+
+    // Prevent manual input exceeding limits
+    input.addEventListener('input', function() {
+        let currentVal = parseInt(input.value);
+        if (isNaN(currentVal) || currentVal < 1) {
+            input.value = 1;
+        } else if (currentVal > maxQuantity) {
+            input.value = maxQuantity;
+        }
+        checkButtons();
+    });
+    
+    // NOTE: I commented out your original Add to Cart button logic 
+    // because you are using a form submit (type="submit"), not an AJAX call.
+    /*
+    control.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+        const productId = control.getAttribute('data-product-id');
+        const quantity = input.value;
+        
+        // Since you are using a form submission, the browser handles the POST request
+        // when the user clicks the submit button. You don't need this block 
+        // unless you switch to an AJAX submission.
+        
+        alert(`Added ${quantity} of product #${productId} to orders!`);
+    });
+    */
+});
+
+console.log("Home page loaded.");
     </script>
 @endsection
