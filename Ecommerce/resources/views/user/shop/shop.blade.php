@@ -103,7 +103,7 @@
     @if ($stock > 0)
         
         {{-- 🚨 ACTION: Wrap the input group in a form for submission --}}
-        <form action="{{ route('orders.store') }}" method="POST">
+        <form action="{{ route('orders.store2') }}" method="POST">
             @csrf
             
             {{-- Hidden fields to send with the form --}}
@@ -127,7 +127,7 @@
                 
                 {{-- 🚨 ACTION: Change 'type="button"' to 'type="submit"' to send the form --}}
                 <button class="btn btn-success add-to-cart-btn ms-2" type="submit">
-                    <i class="bi bi-cart-plus"></i> Add
+                    <i class="bi bi-cart-plus"></i> Make Order
                 </button>
             </div>
         </form>

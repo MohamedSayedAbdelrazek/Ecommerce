@@ -118,7 +118,7 @@
     @if ($stock > 0)
         
         {{-- 🚨 ACTION: Wrap the input group in a form for submission --}}
-        <form action="{{ route('orders.store') }}" method="POST">
+        <form action="{{ route('orders.store2') }}" method="POST">
             @csrf
             
             {{-- Hidden fields to send with the form --}}
@@ -142,7 +142,7 @@
                 
                 {{-- 🚨 ACTION: Change 'type="button"' to 'type="submit"' to send the form --}}
                 <button class="btn btn-success add-to-cart-btn ms-2" type="submit">
-                    <i class="bi bi-cart-plus"></i> Add
+                    <i class="bi bi-cart-plus"></i> Make Order
                 </button>
             </div>
         </form>
@@ -226,10 +226,20 @@
             const input = control.querySelector('.quantity-input');
             const maxQuantity = parseInt(input.getAttribute('max')) || 999; 
 
+             const form = control.closest('form');
+             const hiddenInput = form.querySelector('.quantity-form-input');
+
+             function updateHiddenInput(newVal) {
+                if (hiddenInput) {
+                    hiddenInput.value = newVal;
+                }
+            }
+
             function checkButtons() {
                 const currentVal = parseInt(input.value);
                 minusBtn.disabled = currentVal <= 1;
                 plusBtn.disabled = currentVal >= maxQuantity;
+                 updateHiddenInput(currentVal); 
             }
 
             checkButtons(); 
@@ -258,14 +268,14 @@
                 checkButtons();
             });
             
-            // Add to Cart functionality (simulated)
-            control.querySelector('.add-to-cart-btn').addEventListener('click', function() {
-                const productId = control.getAttribute('data-product-id');
-                const quantity = input.value;
+            // // Add to Cart functionality (simulated)
+            // control.querySelector('.add-to-cart-btn').addEventListener('click', function() {
+            //     const productName = control.getAttribute('data-product-prductName');
+            //     const quantity = input.value;
                 
-                // In a real application, replace this alert with your AJAX call
-                alert(`Simulated: Added ${quantity} of product #${productId} to cart!`);
-            });
+            //     // In a real application, replace this alert with your AJAX call
+            //     alert(`Simulated:Ordered ${quantity} of product #${productName} successfully!`);
+            // });
         });
         
         console.log("Home page loaded with featured product showcase.");

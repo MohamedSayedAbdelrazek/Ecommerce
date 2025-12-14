@@ -36,13 +36,13 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.shop') }}">Shop</a>
+                        <a class="nav-link" href="{{ route('user.shop') }}" style="{{ request()->routeIs('user.shop') ? 'color: #ffc107;' : '' }}">Shop</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.about') }}">About Us</a>
+                        <a class="nav-link" href="{{ route('user.about') }}" style="{{ request()->routeIs('user.about') ? 'color: #ffc107;' : '' }}">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.contact') }}">Contact Us</a>
+                        <a class="nav-link" href="{{ route('user.contact') }}" style="{{ request()->routeIs('user.contact') ? 'color: #ffc107;' : '' }}">Contact Us</a>
                     </li>
                 </ul>
 

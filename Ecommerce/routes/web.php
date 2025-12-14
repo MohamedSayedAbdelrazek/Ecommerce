@@ -49,7 +49,9 @@ Route::middleware(['auth'])->group(function () {
     
     Route::get('/my-orders', [UserOrderController::class, 'myOrders'])->name('user.my-orders');
 });
-Route::post('/orders',[OrderController::class, 'store'])->middleware(['auth', 'verified'])->name('orders.store');
+Route::post('/orders/store2',[OrderController::class, 'store2'])->name('orders.store2');
+Route::post('/orders/store',[OrderController::class, 'store'])->middleware(['auth', 'verified'])->name('orders.store');
+
 Route::middleware(['auth', 'verified', 'role'])->group(function () {
 
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');

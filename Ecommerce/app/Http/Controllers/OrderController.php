@@ -36,8 +36,26 @@ class OrderController extends Controller
     public function store(Request $request)
     {
 
-        if(auth()->user()->role=="user"){
-            $request->validate([
+          $request->validate([
+            'orderName' => 'required',
+            'orderDate' => 'required|date',
+            'totalAmount' => 'required|numeric',
+            'price' => 'required|numeric',
+            'quantity' => 'required|integer',
+            'totalPrice' => 'required|numeric',
+            'order_status_id' => 'required|exists:order_statuses,id',
+            'user_id' => 'required|exists:users,id',
+            'product_id' => 'required|exists:products,id',
+        ]);
+
+        order::create($request->all());
+
+        return redirect()->route('orders.index')->with('success', 'Order created successfully');
+    }
+    public function store2(Request $request)
+    {
+
+        $request->validate([
             'quantity' => 'required|integer',
             'product_id' => 'required|exists:products,id',
         ]);
@@ -56,20 +74,6 @@ class OrderController extends Controller
             'product_id' => $product->id
 
         ]);
-        }else{
-            $request->validate([
-            'orderName' => 'required',
-            'orderDate' => 'required|date',
-            'totalAmount' => 'required|numeric',
-            'price' => 'required|numeric',
-            'quantity' => 'required|integer',
-            'totalPrice' => 'required|numeric',
-            'order_status_id' => 'required|exists:order_statuses,id',
-            'user_id' => 'required|exists:users,id',
-            'product_id' => 'required|exists:products,id',
-        ]);
-        order::create($request->all());
-        }
         $quantity = $product->quantity - $request->quantity;
         $product->update([
             'quantity'=> $quantity

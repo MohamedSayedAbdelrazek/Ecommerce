@@ -60,14 +60,7 @@
                     <i class="bi bi-star"></i>
                     <span>Messages</span>
                 </a>
-                <a href="#" class="menu-item">
-                    <i class="bi bi-credit-card"></i>
-                    <span>Payments</span>
-                </a>
-                <a href="#" class="menu-item">
-                    <i class="bi bi-truck"></i>
-                    <span>Shipping</span>
-                </a>
+              
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
                     <button type="submit" class="menu-item"

@@ -178,14 +178,14 @@
                                 <div class="product-info">
                                     @if($order->product && $order->product->images->first())
                                         <img src="{{ asset('storage/' . $order->product->images->first()->imagePath) }}" 
-                                             alt="{{ $order->product->name }}" 
+                                             alt="{{ $order->product->productName }}" 
                                              class="product-image">
                                     @else
                                         <div class="product-image bg-secondary d-flex align-items-center justify-content-center">
                                             <i class="bi bi-image text-white"></i>
                                         </div>
                                     @endif
-                                    <span>{{ $order->product->name ?? 'Product Unavailable' }}</span>
+                                    <span>{{ $order->product->productName ?? 'Product Unavailable' }}</span>
                                 </div>
                             </td>
                             <td>{{ \Carbon\Carbon::parse($order->orderDate)->format('M d, Y') }}</td>
@@ -209,9 +209,9 @@
                 </table>
             </div>
             
-            <div class="d-flex justify-content-center mt-4">
-                {{ $orders->links() }}
-            </div>
+           <div class="d-flex justify-content-center mt-4">
+    {{ $orders->links('pagination::bootstrap-5') }}
+</div>
         @else
             <div class="orders-table">
                 <div class="empty-orders">
