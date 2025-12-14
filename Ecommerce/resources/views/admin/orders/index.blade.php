@@ -8,11 +8,11 @@
 
 @section('content')
 
-    <div class="mb-3">
+    <!-- <div class="mb-3">
     <a href="{{route('orders.create')}}" class="btn btn-secondary">
             <i class="bi bi-plus-circle"></i> Create Order
         </a>
-    </div>
+    </div> -->
 
     <div class="table-card">
     @if(session('success'))
