@@ -56,10 +56,10 @@
                     <i class="bi bi-grid-3x3"></i>
                     <span>Categories</span>
                 </a>
-                <a href="{{route('messages.index')}}" class="menu-item {{ request()->routeIs('messages.*') ? 'active' : '' }}">
+                <!-- <a href="{{route('messages.index')}}" class="menu-item {{ request()->routeIs('messages.*') ? 'active' : '' }}">
                     <i class="bi bi-star"></i>
                     <span>Messages</span>
-                </a>
+                </a> -->
               
                 <form id="logout-form" action="{{ route('logout') }}" method="POST">
                     @csrf
