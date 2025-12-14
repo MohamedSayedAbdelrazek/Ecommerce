@@ -33,7 +33,20 @@ class FortifyServiceProvider extends ServiceProvider
         });
 
         // Customize login redirect based on user role
-       
+        $this->app->singleton(LoginResponse::class, function () {
+            return new class implements LoginResponse {
+                public function toResponse($request)
+                {
+                    $user = auth()->user();
+                    
+                    if ($user && $user->role === 'admin') {
+                        return redirect()->route('dashboard');
+                    }
+                    
+                    return redirect()->route('user.index');
+                }
+            };
+        });
     }
 
     /**
