@@ -8,6 +8,7 @@ use App\Http\Controllers\user\ShopController;
 use App\Http\Controllers\user\ContactController;
 use App\Http\Controllers\user\HomeController;
 use App\Http\Controllers\user\ProfileController;
+use App\Http\Controllers\user\OrderController as UserOrderController;
 use App\Http\Controllers\OrderController;
 
 // routes/web.php (Line 10)
@@ -45,6 +46,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/about', function () {
         return view('user.about.about');
     })->name('user.about');
+    
+    Route::get('/my-orders', [UserOrderController::class, 'myOrders'])->name('user.my-orders');
 });
 Route::post('/orders',[OrderController::class, 'store'])->middleware(['auth', 'verified'])->name('orders.store');
 Route::middleware(['auth', 'verified', 'role'])->group(function () {

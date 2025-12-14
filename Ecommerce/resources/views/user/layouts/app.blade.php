@@ -36,9 +36,6 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{  route('user.index')  }}">Home</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.shop') }}">Shop</a>
                     </li>
                     <li class="nav-item">
@@ -56,7 +53,7 @@
                             <i class="bi bi-person-circle"></i> {{ auth()->user()->name }}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">My Orders</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.my-orders') }}"><i class="bi bi-bag-check me-2"></i>My Orders</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.profile') }}">Profile</a></li>
                             
                             @if(auth()->user()->role === 'admin')

@@ -34,8 +34,7 @@
     --}}
     <div class="container">
         <div class="text-center mb-5">
-            {{-- Assuming the checkout route is defined, change '#' to your actual route --}}
-            <a href="#" class="btn btn-lg btn-success shadow-lg">
+            <a href="{{ route('user.my-orders') }}" class="btn btn-lg btn-success shadow-lg">
                 <i class="bi bi-bag-check-fill me-2"></i> View My Orders
             </a>
             <p class="mt-2 text-muted">Review items in your cart and finalize your purchase.</p>
@@ -115,28 +114,44 @@
 
                                     {{-- Quantity Selector and Add to Cart --}}
                                     <div class="card-footer bg-white border-0 pt-0 pb-0 mt-auto">
-                                        @if ($stock > 0)
-                                            <div class="input-group input-group-sm quantity-control" data-product-id="{{ $product->id }}">
-                                                <button class="btn btn-outline-secondary btn-minus" type="button" disabled>-</button>
-                                                <input type="number" 
-                                                        class="form-control text-center quantity-input" 
-                                                        value="1" 
-                                                        min="1" 
-                                                        max="{{ $stock }}" 
-                                                        style="max-width: 50px;" 
-                                                        aria-label="Quantity"
-                                                >
-                                                <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
-                                                
-                                                <button class="btn btn-success add-to-cart-btn ms-2 w-50" type="button">
-                                                    <i class="bi bi-cart-plus"></i> Add to Cart
-                                                </button>
-                                            </div>
-                                        @else
-                                            <button class="btn btn-danger btn-lg w-100" type="button" disabled>
-                                                Out of Stock
-                                            </button>
-                                        @endif
+                                       
+    @if ($stock > 0)
+        
+        {{-- 🚨 ACTION: Wrap the input group in a form for submission --}}
+        <form action="{{ route('orders.store') }}" method="POST">
+            @csrf
+            
+            {{-- Hidden fields to send with the form --}}
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+            <input type="hidden" name="quantity" class="quantity-form-input" value="1">
+            
+            <div class="input-group input-group-sm quantity-control" data-product-id="{{ $product->id }}">
+                <button class="btn btn-outline-secondary btn-minus" type="button" disabled>-</button>
+                
+                {{-- NOTE: This input is for VISUAL/JS control --}}
+                <input type="number" 
+                       class="form-control text-center quantity-input" 
+                       value="1" 
+                       min="1" 
+                       max="{{ $stock }}" 
+                       style="max-width: 50px;" 
+                       aria-label="Quantity"
+                >
+                
+                <button class="btn btn-outline-secondary btn-plus" type="button">+</button>
+                
+                {{-- 🚨 ACTION: Change 'type="button"' to 'type="submit"' to send the form --}}
+                <button class="btn btn-success add-to-cart-btn ms-2" type="submit">
+                    <i class="bi bi-cart-plus"></i> Add
+                </button>
+            </div>
+        </form>
+    @else
+        {{-- Out of Stock Button --}}
+        <button class="btn btn-danger btn-lg w-100" type="button" disabled>
+            Out of Stock
+        </button>
+    @endif
                                     </div>
                                 </div>
                             </div>

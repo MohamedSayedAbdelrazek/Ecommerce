@@ -9,7 +9,7 @@
         {{-- NEW: Place Order Button Section (remains the main call-to-action) --}}
         <div class="text-center mb-5">
             {{-- Assuming the checkout route is defined, otherwise change '#' to your route --}}
-            <a href="#" class="btn btn-lg btn-success shadow-lg">
+            <a href="{{ route('user.my-orders') }}" class="btn btn-lg btn-success shadow-lg">
                 <i class="bi bi-bag-check-fill me-2"></i> View My Orders
             </a>
             <p class="mt-2 text-muted">Review items in your cart and finalize your purchase.</p>
